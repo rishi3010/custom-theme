@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "size-guide",
+      "settings": {
+        "heading": "Size Guide",
+        "subheading": "Find your perfect fit with our comprehensive sizing guide"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

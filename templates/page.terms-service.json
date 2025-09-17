@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "terms-service",
+      "settings": {
+        "heading": "Terms of Service",
+        "subtitle": "Last updated: "
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

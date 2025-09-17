@@ -1,0 +1,82 @@
+{
+  "sections": {
+    "promo_banner": {
+      "type": "promo-banner",
+      "settings": {
+        "heading": "Welcome to SNAPSHIP STORE",
+        "description": "Get 25% off your first order with code SNAPSHIP25",
+        "discount_code": "SNAPSHIP25",
+        "button_text": "Shop Now",
+        "button_url": "/collections/all"
+      }
+    },
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "SNAPSHIP STORE - Premium Accessories Delivered Fast",
+        "subheading": "Experience lightning-fast delivery of premium accessories. From tech gadgets to fashion essentials, we ship quality products directly to your door with our signature 'snap' speed.",
+        "discount_text": "25% OFF First Order",
+        "button_text": "Explore Collection",
+        "button_url": "/collections/all",
+        "secondary_button_text": "Learn More",
+        "secondary_button_url": "/pages/about",
+        "show_features": true,
+        "feature_1_title": "Lightning Fast Delivery",
+        "feature_2_title": "Premium Quality",
+        "feature_3_title": "Easy Returns"
+      }
+    },
+    "product_carousel": {
+      "type": "product-carousel",
+      "settings": {
+        "heading": "Featured Products",
+        "subheading": "Handpicked premium accessories delivered with SNAPSHIP speed"
+      }
+    },
+    "animated_stats": {
+      "type": "animated-stats",
+      "settings": {
+        "stat_1_number": 50000,
+        "stat_1_label": "Happy Customers",
+        "stat_2_number": 24,
+        "stat_2_label": "Hour Delivery",
+        "stat_3_number": 99,
+        "stat_3_label": "% Satisfaction",
+        "stat_4_number": 50,
+        "stat_4_label": "Countries Served"
+      }
+    },
+    "scroll_animations": {
+      "type": "scroll-animations",
+      "settings": {
+        "section_title": "Why Choose SNAPSHIP STORE?"
+      }
+    },
+    "testimonials_slider": {
+      "type": "testimonials-slider",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "subheading": "Real reviews from customers who love SNAPSHIP STORE's fast delivery and premium products"
+      }
+    },
+    "floating_actions": {
+      "type": "floating-actions",
+      "settings": {
+        "show_back_to_top": true,
+        "show_live_chat": true,
+        "show_wishlist": true,
+        "show_quick_cart": true,
+        "show_search": true
+      }
+    }
+  },
+  "order": [
+    "promo_banner",
+    "hero_banner",
+    "product_carousel",
+    "animated_stats",
+    "scroll_animations",
+    "testimonials_slider",
+    "floating_actions"
+  ]
+}

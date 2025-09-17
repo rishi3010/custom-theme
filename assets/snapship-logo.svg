@@ -1,0 +1,51 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="boxGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066CC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shipping box -->
+  <g transform="translate(10, 10)">
+    <!-- Box front face -->
+    <rect x="0" y="8" width="16" height="12" fill="url(#boxGradient)" stroke="#00D4FF" stroke-width="0.5"/>
+    <!-- Box top face -->
+    <polygon points="0,8 8,0 24,0 16,8" fill="#00D4FF" stroke="#00D4FF" stroke-width="0.5"/>
+    <!-- Box right face -->
+    <polygon points="16,8 24,0 24,12 16,20" fill="#0066CC" stroke="#00D4FF" stroke-width="0.5"/>
+    <!-- Tape/label -->
+    <rect x="2" y="12" width="12" height="2" fill="#00D4FF" opacity="0.8"/>
+  </g>
+  
+  <!-- Circular arrow -->
+  <g transform="translate(35, 20)">
+    <path d="M 0 15 A 15 15 0 0 1 15 0" stroke="#00D4FF" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+    <path d="M 12 0 L 15 0 L 15 3" stroke="#00D4FF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Motion lines/sparkles -->
+  <g transform="translate(5, 5)">
+    <line x1="0" y1="0" x2="4" y2="4" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="8" y1="0" x2="12" y2="4" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+    <line x1="4" y1="0" x2="8" y2="4" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+  </g>
+  
+  <!-- SNAPSHIP text -->
+  <text x="60" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="url(#textGradient)" filter="url(#glow)">SNAPSHIP</text>
+  
+  <!-- STORE text -->
+  <text x="60" y="45" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="url(#textGradient)" filter="url(#glow)">STORE</text>
+</svg>

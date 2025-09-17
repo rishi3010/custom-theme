@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact",
+      "settings": {
+        "heading": "Contact Us",
+        "subheading": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+        "phone": "+1 (555) 123-4567",
+        "phone_hours": "Mon-Fri: 9AM-6PM EST",
+        "email": "hello@dailystore.com",
+        "email_response": "We typically respond within 24 hours",
+        "address": "123 Main Street\nSuite 100\nNew York, NY 10001",
+        "address_hours": "Mon-Fri: 9AM-6PM EST",
+        "show_business_hours": true,
+        "weekday_hours": "9:00 AM - 6:00 PM",
+        "saturday_hours": "10:00 AM - 4:00 PM",
+        "sunday_hours": "Closed",
+        "show_social_media": true,
+        "facebook_url": "https://facebook.com/dailystore",
+        "instagram_url": "https://instagram.com/dailystore",
+        "twitter_url": "https://twitter.com/dailystore"
+      }
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

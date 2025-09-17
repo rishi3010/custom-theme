@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "blog",
+      "settings": {
+        "heading": "Fitness Blog",
+        "subheading": "Tips, guides, and inspiration for your fitness journey"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

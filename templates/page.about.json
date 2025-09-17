@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "main": {
+      "type": "about",
+      "settings": {
+        "heading": "About Us",
+        "subheading": "Discover our story, mission, and commitment to quality",
+        "story_heading": "Our Story",
+        "story_content": "<p>Founded with a passion for fitness and quality, our brand was born from the belief that your gym performance is directly tied to the clothes you wear. Every rep, every drop of sweat, every personal best — they all begin with how you feel in your workout gear.</p><p>We started as a small team of fitness enthusiasts who were frustrated with the lack of quality activewear that could keep up with our intense training sessions. That frustration became our motivation to create something better.</p>",
+        "mission_heading": "Our Mission & Values",
+        "show_team": true,
+        "team_heading": "Meet Our Team",
+        "stat_customers": "50,000+",
+        "stat_products": "500+",
+        "stat_years": "7+",
+        "stat_countries": "25+",
+        "cta_heading": "Ready to Experience Quality Activewear?",
+        "cta_text": "Join thousands of athletes who trust our products to enhance their performance.",
+        "cta_button_text": "Shop Now",
+        "cta_button_url": "/collections/all"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

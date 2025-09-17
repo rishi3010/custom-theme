@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "faq",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "subheading": "Find answers to common questions about our products, shipping, and policies"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

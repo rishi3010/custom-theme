@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "shipping-returns",
+      "settings": {
+        "heading": "Shipping & Returns",
+        "subheading": "Everything you need to know about shipping, returns, and exchanges"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "collection_header": {
+      "type": "collection",
+      "settings": {
+        "show_collection_image": true,
+        "show_collection_description": true,
+        "collection_image_height": "medium"
+      }
+    },
+    "collection_products": {
+      "type": "collection",
+      "settings": {
+        "products_per_row": 4,
+        "rows": 3,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "filter_type": "horizontal",
+        "filter_groups": "color,size,price"
+      }
+    }
+  },
+  "order": [
+    "collection_header",
+    "collection_products"
+  ]
+}
