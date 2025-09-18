@@ -1,0 +1,44 @@
+<style>
+  .t-slider { padding: 28px 0; }
+  .t-slider__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 1fr); gap: 16px; overflow-x:auto; padding-bottom:8px; }
+  .t-card { padding: 18px; }
+  .t-name { margin-top: 8px; color: var(--color-text-light); }
+</style>
+
+<section class="t-slider">
+  <div class="page-width">
+    <h2>{{ section.settings.heading }}</h2>
+    <p style="color: var(--color-text-light);">{{ section.settings.subheading }}</p>
+    <div class="t-slider__grid">
+      {% for block in section.blocks %}
+        <div class="card t-card">
+          <div>“{{ block.settings.quote }}”</div>
+          <div class="t-name">— {{ block.settings.author }}</div>
+        </div>
+      {% else %}
+        <div class="card t-card">No testimonials yet.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials slider",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What customers say" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Real reviews from real buyers" }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "text", "id": "quote", "label": "Quote", "default": "Amazing quality and fast delivery!" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Happy Customer" }
+      ]
+    }
+  ],
+  "max_blocks": 8
+}
+{% endschema %}

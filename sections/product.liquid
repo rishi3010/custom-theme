@@ -1,0 +1,53 @@
+<style>
+  .pdp { padding: 24px 0; }
+  .pdp__grid { display:grid; gap: 24px; grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 992px){ .pdp__grid { grid-template-columns: 1.1fr .9fr; } }
+  .price { font-size: 1.5rem; font-weight: 700; }
+  .buy-row { display:flex; gap: 12px; align-items: center; margin-top: 14px; }
+</style>
+
+<section class="pdp">
+  <div class="page-width pdp__grid">
+    <div>
+      {% if product.media.size > 0 %}
+        <div style="display:grid; gap: 10px;">
+          {% for media in product.media %}
+            <div class="card" style="padding: 6px;">
+              {{ media | media_tag: image_size: '1200x' }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    <div>
+      <h1>{{ product.title }}</h1>
+      <div class="price">{{ product.price | money }}</div>
+
+      {% form 'product', product %}
+        {% unless product.has_only_default_variant %}
+          {% for option in product.options_with_values %}
+            <label for="Option-{{ forloop.index }}">{{ option.name }}</label>
+            <select id="Option-{{ forloop.index }}" name="options[{{ option.name }}]">
+              {% for value in option.values %}
+                <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+              {% endfor %}
+            </select>
+          {% endfor %}
+        {% endunless %}
+
+        <div class="buy-row">
+          <input type="number" name="quantity" value="1" min="1" style="width:90px;">
+          <button type="submit" class="btn">{{ 'products.product.add_to_cart' | t | default: 'Add to cart' }}</button>
+        </div>
+      {% endform %}
+
+      {% if product.description != blank %}
+        <div style="margin-top: 16px; color: var(--color-text-light);">{{ product.description }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Product" }
+{% endschema %}

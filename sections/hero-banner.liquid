@@ -1,0 +1,64 @@
+<style>
+  .hero { position: relative; padding: 48px 0; background: var(--color-background); }
+  .hero__grid { display: grid; gap: 24px; grid-template-columns: 1fr; align-items: center; }
+  @media (min-width: 992px) { .hero__grid { grid-template-columns: 1.2fr .8fr; } }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3rem); }
+  .hero p { color: var(--color-text-light); }
+  .hero .cta { display: flex; gap: 12px; margin-top: 18px; }
+  .hero .features { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 22px; }
+  .hero .badge { display: inline-block; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 999px; padding: 6px 12px; color: var(--color-accent); font-weight: 600; }
+</style>
+
+<section class="hero">
+  <div class="page-width hero__grid">
+    <div>
+      {% if section.settings.discount_text != blank %}
+        <span class="badge">{{ section.settings.discount_text }}</span>
+      {% endif %}
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.subheading }}</p>
+      <div class="cta">
+        {% if section.settings.button_text and section.settings.button_url %}
+          <a class="btn" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+        {% endif %}
+        {% if section.settings.secondary_button_text and section.settings.secondary_button_url %}
+          <a class="btn btn-secondary" href="{{ section.settings.secondary_button_url }}">{{ section.settings.secondary_button_text }}</a>
+        {% endif %}
+      </div>
+      {% if section.settings.show_features %}
+        <div class="features">
+          <div class="card" style="padding:12px 16px; text-align:center;">{{ section.settings.feature_1_title }}</div>
+          <div class="card" style="padding:12px 16px; text-align:center;">{{ section.settings.feature_2_title }}</div>
+          <div class="card" style="padding:12px 16px; text-align:center;">{{ section.settings.feature_3_title }}</div>
+        </div>
+      {% endif %}
+    </div>
+    <div>
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="">
+      {% else %}
+        <img src="{{ 'shoppy-x-ray.svg' | asset_url }}" alt="">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Ultra Electronics, Fast Delivery" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Shop top electronics with premium build and ultra-fast shipping." },
+    { "type": "text", "id": "discount_text", "label": "Discount badge" },
+    { "type": "text", "id": "button_text", "label": "Primary button text", "default": "Shop now" },
+    { "type": "url", "id": "button_url", "label": "Primary button link" },
+    { "type": "text", "id": "secondary_button_text", "label": "Secondary button text" },
+    { "type": "url", "id": "secondary_button_url", "label": "Secondary button link" },
+    { "type": "checkbox", "id": "show_features", "label": "Show features", "default": true },
+    { "type": "text", "id": "feature_1_title", "label": "Feature 1", "default": "Fast Delivery" },
+    { "type": "text", "id": "feature_2_title", "label": "Feature 2", "default": "Premium Quality" },
+    { "type": "text", "id": "feature_3_title", "label": "Feature 3", "default": "Great Support" },
+    { "type": "image_picker", "id": "image", "label": "Right image" }
+  ]
+}
+{% endschema %}

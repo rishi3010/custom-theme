@@ -1,0 +1,30 @@
+<style>
+  .why { padding: 28px 0; }
+  .why__grid { display: grid; gap: 16px; grid-template-columns: repeat(1, minmax(0,1fr)); }
+  @media (min-width: 768px) { .why__grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  .why .card { padding: 18px; transition: transform .25s ease, box-shadow .25s ease; }
+  .why .card:hover { transform: translateY(-4px); box-shadow: var(--style-shadow-hover); }
+</style>
+
+<section class="why">
+  <div class="page-width">
+    <h2>{{ section.settings.section_title }}</h2>
+    <div class="why__grid">
+      {% for i in (1..6) %}
+        <div class="card">
+          <h3>Reason {{ i }}</h3>
+          <p style="color: var(--color-text_light);">We focus on quality, speed, and great pricing.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Scroll animations",
+  "settings": [
+    { "type": "text", "id": "section_title", "label": "Section title", "default": "Why choose us" }
+  ]
+}
+{% endschema %}

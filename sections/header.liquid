@@ -1,0 +1,139 @@
+{%- liquid -%}
+  assign logo = section.settings.logo
+  assign logo_width = section.settings.logo_width | default: 140
+{%- endliquid -%}
+
+<style>
+  .header {
+    position: {% if section.settings.sticky_header %}sticky{% else %}relative{% endif %};
+    top: 0;
+    z-index: 50;
+    background: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+  .header__logo { display: flex; align-items: center; }
+  .header__nav { display: none; justify-content: center; }
+  .header__actions { display: flex; justify-content: flex-end; gap: 12px; align-items: center; }
+  @media (min-width: 992px) { .header__nav { display: flex; } }
+  .nav { display: flex; gap: 18px; }
+  .nav > li { position: relative; list-style: none; }
+  .nav > li > a { padding: 12px 8px; color: var(--color-foreground); }
+  .nav > li:hover > a { color: var(--color-accent); }
+  .nav > li:hover .mega, .nav > li:focus-within .mega { display: grid; }
+  .mega { display: none; position: absolute; left: 0; top: 100%; width: min(78rem, 90vw); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; box-shadow: var(--style-shadow);
+          grid-template-columns: repeat(4, minmax(0,1fr)); gap: 24px; padding: 24px; }
+  .mega a { color: var(--color-foreground); }
+  .mega h4 { margin-bottom: 8px; font-size: 0.95rem; color: var(--color-text-light); text-transform: uppercase; letter-spacing: .04em; }
+  .mobile-toggle { display: inline-flex; padding: 10px 14px; border: 1px solid var(--color-border); border-radius: 10px; background: var(--color-surface); }
+  @media (min-width: 992px) { .mobile-toggle { display: none; } }
+  details.header-drawer { position: relative; }
+  details.header-drawer[open] > .drawer { display: block; }
+  .drawer { display: none; position: absolute; left: 0; right: 0; top: calc(100% + 8px); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; box-shadow: var(--style-shadow); padding: 16px; }
+  .drawer a { display: block; padding: 12px; color: var(--color-foreground); border-radius: 8px; }
+  .drawer a:hover { background: var(--color-surface-hover); }
+</style>
+
+<header class="header">
+  {% if section.settings.show_announcement and section.settings.announcement_text != blank %}
+    <div class="page-width" style="padding: 8px 0; text-align:center; font-size:.95rem; color: var(--color-foreground); background: var(--color-surface); border-bottom: 1px solid var(--color-border);">
+      {{ section.settings.announcement_text }}
+    </div>
+  {% endif %}
+
+  <div class="page-width header__inner">
+    <div class="header__logo">
+      <a href="/" aria-label="{{ shop.name }}">
+        {% if logo != blank %}
+          <img src="{{ logo | image_url: width: logo_width | escape }}" width="{{ logo_width }}" height="auto" alt="{{ shop.name }} logo">
+        {% else %}
+          <img src="{{ 'snapship-logo.svg' | asset_url }}" alt="{{ shop.name }}" style="height: 36px;">
+        {% endif %}
+      </a>
+    </div>
+
+    <nav class="header__nav" role="navigation" aria-label="Main">
+      {% if section.settings.menu != blank %}
+        <ul class="nav" role="list">
+          {% for link in section.settings.menu.links %}
+            <li>
+              <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+              {% if link.links.size > 0 %}
+                <div class="mega">
+                  {% for child in link.links %}
+                    <div>
+                      <h4>{{ child.title }}</h4>
+                      {% if child.links.size > 0 %}
+                        <ul role="list" style="display:grid; gap:6px;">
+                          {% for grandchild in child.links %}
+                            <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </nav>
+
+    <div class="header__actions">
+      {% if section.settings.enable_search %}
+        <a href="/search" aria-label="Search" class="btn btn-secondary">Search</a>
+      {% endif %}
+      {% if shop.customer_accounts_enabled and section.settings.enable_account %}
+        <a href="/account" aria-label="Account" class="btn btn-secondary">
+          <img src="{{ 'icon-account.svg' | asset_url }}" alt="" style="height:18px; width:18px; vertical-align:middle; margin-right:8px;"> Account
+        </a>
+      {% endif %}
+      {% if section.settings.enable_cart %}
+        <a href="/cart" aria-label="Cart" class="btn">
+          <img src="{{ 'icon-cart.svg' | asset_url }}" alt="" style="height:18px; width:18px; vertical-align:middle; margin-right:8px;"> Cart
+          <span class="visually-hidden">{{ cart.item_count }} items</span>
+        </a>
+      {% endif %}
+
+      <details class="header-drawer"{% unless section.settings.enable_mobile_menu %} style="display:none"{% endunless %}>
+        <summary class="mobile-toggle">Menu</summary>
+        <div class="drawer">
+          {% if section.settings.menu != blank %}
+            {% for link in section.settings.menu.links %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              {% if link.links.size > 0 %}
+                {% for child in link.links %}
+                  <a href="{{ child.url }}" style="padding-left:28px;">— {{ child.title }}</a>
+                  {% if child.links.size > 0 %}
+                    {% for grandchild in child.links %}
+                      <a href="{{ grandchild.url }}" style="padding-left:48px;">• {{ grandchild.title }}</a>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "range", "id": "logo_width", "min": 60, "max": 240, "step": 4, "unit": "px", "label": "Logo width", "default": 140 },
+    { "type": "link_list", "id": "menu", "label": "Main menu" },
+    { "type": "checkbox", "id": "sticky_header", "label": "Sticky header", "default": true },
+    { "type": "checkbox", "id": "enable_mobile_menu", "label": "Enable mobile menu", "default": true },
+    { "type": "checkbox", "id": "enable_search", "label": "Show search", "default": true },
+    { "type": "checkbox", "id": "enable_account", "label": "Show account", "default": true },
+    { "type": "checkbox", "id": "enable_cart", "label": "Show cart", "default": true },
+    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+    { "type": "text", "id": "announcement_text", "label": "Announcement text", "default": "Welcome to {{ shop.name }} — Great deals live now!" }
+  ]
+}
+{% endschema %}
