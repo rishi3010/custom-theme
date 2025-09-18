@@ -1,0 +1,35 @@
+<style>
+  .plp { padding: 24px 0; }
+  .plp__head { display:flex; align-items:center; justify-content: space-between; margin-bottom: 16px; }
+  .plp__grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+  @media (min-width: 768px){ .plp__grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  @media (min-width: 1200px){ .plp__grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+</style>
+
+<section class="plp">
+  <div class="page-width">
+    <div class="plp__head">
+      <h1>{{ collection.title }}</h1>
+      <div style="color: var(--color-text-light);">{{ collection.all_products_count }} products</div>
+    </div>
+    <div class="plp__grid">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}" class="card" style="padding: 12px; display:block;">
+          {% if product.featured_media %}
+            <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.title | escape }}">
+          {% endif %}
+          <div style="padding-top: 10px;">
+            <div style="font-weight:600">{{ product.title }}</div>
+            <div style="color: var(--color-text-light);">{{ product.price | money }}</div>
+          </div>
+        </a>
+      {% else %}
+        <div class="card" style="padding:24px;">No products found</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collection" }
+{% endschema %}

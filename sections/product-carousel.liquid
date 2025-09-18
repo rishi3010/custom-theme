@@ -1,0 +1,45 @@
+<style>
+  .carousel { padding: 28px 0; }
+  .carousel__head { display:flex; align-items:center; justify-content: space-between; margin-bottom: 16px; }
+  .carousel__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+  .carousel__grid > a { scroll-snap-align: start; }
+</style>
+
+<section class="carousel">
+  <div class="page-width">
+    <div class="carousel__head">
+      <div>
+        <h2>{{ section.settings.heading }}</h2>
+        <p style="color: var(--color-text-light);">{{ section.settings.subheading }}</p>
+      </div>
+      <a href="/collections/all" class="btn btn-secondary">View all</a>
+    </div>
+    <div class="carousel__grid">
+      {% assign products = collections[section.settings.collection_handle].products | default: collections['all'].products %}
+      {% for product in products limit: 12 %}
+        <a href="{{ product.url }}" class="card" style="padding: 12px; display:block;">
+          {% if product.featured_media %}
+            <img src="{{ product.featured_media | image_url: width: 600 }}" alt="{{ product.title | escape }}">
+          {% endif %}
+          <div style="padding-top: 10px;">
+            <div style="font-weight:600">{{ product.title }}</div>
+            <div style="color: var(--color-text-light);">{{ product.price | money }}</div>
+          </div>
+        </a>
+      {% else %}
+        <div class="card" style="padding:24px;">No products found</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product carousel",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Featured products" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Top picks just for you" },
+    { "type": "text", "id": "collection_handle", "label": "Collection handle", "default": "all" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,48 @@
+<style>
+  .stats { padding: 28px 0; }
+  .stats__grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
+  @media (min-width: 768px) { .stats__grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+  .stats .card { text-align: center; padding: 18px; }
+  .stats .num { font-size: 1.6rem; font-weight: 700; color: var(--color-accent); }
+  .stats .label { color: var(--color-text-light); }
+</style>
+
+<section class="stats">
+  <div class="page-width stats__grid">
+    <div class="card"><div class="num" data-target="{{ section.settings.stat_1_number | default: 0 }}">0</div><div class="label">{{ section.settings.stat_1_label }}</div></div>
+    <div class="card"><div class="num" data-target="{{ section.settings.stat_2_number | default: 0 }}">0</div><div class="label">{{ section.settings.stat_2_label }}</div></div>
+    <div class="card"><div class="num" data-target="{{ section.settings.stat_3_number | default: 0 }}">0</div><div class="label">{{ section.settings.stat_3_label }}</div></div>
+    <div class="card"><div class="num" data-target="{{ section.settings.stat_4_number | default: 0 }}">0</div><div class="label">{{ section.settings.stat_4_label }}</div></div>
+  </div>
+</section>
+
+<script>
+  document.currentScript && document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.stats .num').forEach(function(el){
+      const target = parseInt(el.getAttribute('data-target')||'0', 10);
+      let current = 0;
+      const step = Math.max(1, Math.round(target / 60));
+      const timer = setInterval(function(){
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = current.toLocaleString();
+      }, 16);
+    });
+  });
+  </script>
+
+{% schema %}
+{
+  "name": "Animated stats",
+  "settings": [
+    { "type": "number", "id": "stat_1_number", "label": "Stat 1 number", "default": 50 },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 label", "default": "K+ Customers" },
+    { "type": "number", "id": "stat_2_number", "label": "Stat 2 number", "default": 24 },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 label", "default": "Hour Delivery" },
+    { "type": "number", "id": "stat_3_number", "label": "Stat 3 number", "default": 99 },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 label", "default": "% Satisfaction" },
+    { "type": "number", "id": "stat_4_number", "label": "Stat 4 number", "default": 50 },
+    { "type": "text", "id": "stat_4_label", "label": "Stat 4 label", "default": "Countries Served" }
+  ]
+}
+{% endschema %}
